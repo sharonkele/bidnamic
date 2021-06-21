@@ -4,9 +4,8 @@ resource "aws_instance" "instance" {
   subnet_id = var.subnet_public_id
   vpc_security_group_ids = ["${var.security_group_ids}"]
   key_name = "${var.key_pair_name}"
-  tags {
-    Environment = var.environment_tag
-  }
+  tags = local.tags
+  
 }
 resource "aws_eip" "testInstanceEip" {
   vpc       = true
@@ -38,5 +37,18 @@ resource "aws_iam_role" "ec2_role" {
 }
 
 resource "aws_iam_policy" "flask_ec2" {
+  name = "flask-app-policy"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
   
 }

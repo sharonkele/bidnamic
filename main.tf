@@ -23,14 +23,24 @@ module "ec2_instance" {
   vpc_id = module.network.vpc_id
   security_group_id = [module.security_group.sg22, module.security_group.sg_80]
   
-  tags  {
-    var.environment_tag
-
+  tags = local.tags
+  
+  provisioner "remote-exec" {
+    inline = [
+      sudo yum update
+      sudo amazon-linux-extras install docker
+      sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)"-o /usr/local/bin/docker-compose
+      sudo usermod -aG docker $(whoami)
+      sudo chmod +x /usr/local/bin/docker-compose
+      sudo yum install git
+      git clone https://github.com/sharonkele/bidnamic.git
+      docker-compose up -d --build
+    ]
+  
   }
-  user_data = <<EOF 
 
 
-}
+
 
 #rds resources
 module "rds_database" {
