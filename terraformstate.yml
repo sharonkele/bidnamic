@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  accountName:
+    Type: String
+    Default: 'flaskapp'
+    Description: 'Name of account'
+    
+    
+###State Resources ###
+Resources:
+  stateBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: 'Private'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: AES256
+
+      BucketName: !Join
+        - !Ref accountName
+        - -'state-bucket'
+      VersioningConfiguration:
+        Status : 'Enabled'
+
+  terraformLockDbTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      KeySchema:
+        - AttributeName: 'lockID'
+          AttributeType: 'S'
+      TableName: 'terraformlock'
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      Tags:
+        - Key: 'Application_Owner'
+          Value: 'sharon'  

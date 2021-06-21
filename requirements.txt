@@ -1,0 +1,17 @@
+Flask==1.1.1
+Flask-Bcrypt==0.7.1
+Flask-WTF==0.14.2
+itsdangerous==1.1.0
+Jinja2==2.10.3
+jsonpatch==1.10
+jsonpointer==1.9
+MarkupSafe==1.1.1
+MySQL-python==1.2.5
+mysqlclient==1.4.5
+pycparser==2.19
+PyMySQL==0.9.3
+six==1.13.0
+
+virtualenv==16.7.2
+Werkzeug==0.16.0
+WTForms==2.2.1
