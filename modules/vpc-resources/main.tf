@@ -2,17 +2,13 @@ resource "aws_vpc" "vpc" {
   cidr_block = var.cidr_block_range
   enable_dns_support   = true
   enable_dns_hostnames = true
-  tags {
-    Environment = var.environment_tag
-  }
+  tags = local.tags
 }
 
 #igw associated with vpc
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
-  tags {
-    Environment = var.environment_tag
-  }
+  tags = local.tags
 }
 
 #subnet inside vpc
@@ -34,9 +30,7 @@ route {
       cidr_block = "0.0.0.0/0"
       gateway_id = aws_internet_gateway.igw.id
   }
-tags {
-    Environment = var.environment_tag
-  }
+tags = local.tags
 }
 resource "aws_route_table_association" "rta_subnet_public" {
   subnet_id      = aws_subnet.subnet_public.id
