@@ -1,11 +1,11 @@
 variable "instance_ami" {
     type = string
-    default = 
+    default = ""
 }
 
 variable "instance_type" {
     type = string
-    default = 
+    default = ""
 }
 
 

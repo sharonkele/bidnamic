@@ -1,4 +1,4 @@
-#rds or dyanmodb
+#rds database
 
 resource "aws_db_instance" "rds" {
   allocated_storage    = 10

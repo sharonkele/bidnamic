@@ -13,9 +13,7 @@ egress {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-tags {
-    var.environment_tag
-  }
+tags = locals.tags
 }
 resource "aws_security_group" "sg_80" {
   name = "sg_80"
@@ -32,8 +30,6 @@ egress {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-tags {
-    Environment = var.environment_tag
-  }
+tags = locals.tags
 }
 

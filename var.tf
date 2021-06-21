@@ -2,29 +2,61 @@ variable "region" {
     default = "eu-west-1"
 }
 
+variable "allocated_storage" {
+  default = 5
+}
 
+variable "instance_class" {
+  default = "db.t3.micro"
+}
 
+variable "engine" {
+    default = "mysql"
+  
+}
+variable "engine_version" {
+  default = "5.7"
+}
 
-data "terraform_remote_state" "services" {
-    backend = "s3"
-    config = {
-        bucket = local.tf_state_bucket
-        key =
-        region =
-        dynamodb_table = "terraformLock"
-    }
+variable "name" {
+    type = string
+    default = "flask-app-database"
+  
+}
+
+variable "username" {
+  type = string
+  default = ""
+}
+
+variable "password" {
+    type = string
+    default = ""
+  
+}
+
+variable "parameter_group_name" {
+    type = string
+    default = ""
+
+}
+
+variable "skip_final_snapshot" {
+    type = bool
+    default = false
+}
+
+variable "instance_ami" {
+    type = string
+    default = ""
+}
+
+variable "instance_type" {
+    type = string
+    default = ""
 }
 
 
-
-
-
-
-
-locals {
-    tags = {
-        Environment = var.Environment
-        Application_Owner = var.Application_Owner
-        Application_Name = var.Application_Name
-    }
+variable "cidr_block_range" {
+    default = ["0.0.0.0/0"]
 }
