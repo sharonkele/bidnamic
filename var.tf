@@ -48,12 +48,12 @@ variable "skip_final_snapshot" {
 
 variable "instance_ami" {
     type = string
-    default = ""
+    default = "ami-0ac43988dfd31ab9a"
 }
 
 variable "instance_type" {
     type = string
-    default = ""
+    default = "t2.micro"
 }
 
 

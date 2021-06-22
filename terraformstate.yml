@@ -18,7 +18,8 @@ Resources:
             SSEAlgorithm: AES256
 
       BucketName: !Join
-        - !Ref accountName
+        - ''
+        - - !Ref accountName
         - -'state-bucket'
       VersioningConfiguration:
         Status : 'Enabled'

@@ -3,7 +3,7 @@ resource "aws_instance" "instance" {
   instance_type = var.instance_type
   subnet_id = var.subnet_public_id
   vpc_security_group_ids = ["${var.security_group_ids}"]
-  key_name = "${var.key_pair_name}"
+  key_name = var.key_pair_name
   tags = local.tags
   
 }
@@ -34,7 +34,7 @@ resource "aws_iam_role" "ec2_role" {
   tags = local.tags
   
 }
-}
+
 
 resource "aws_iam_policy" "flask_ec2" {
   name = "flask-app-policy"

@@ -8,7 +8,7 @@ variable "Application_Owner" {}
 
 variable "Application_Name" {}
 
-}
+
 
 locals {
     tags = {
