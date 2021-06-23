@@ -5,14 +5,10 @@ module "network" {
   environment = var.environment_tag
 }
 
-#security group
-module "security_group" {
-  source = "./modules/security-group"
-  region = var.region
-  vpc_id = module.netowrk.vpc_id
-  environment = var.environment_tag
+module "s3-resources" {
+  source = "./modules/s3-resource"
+  bucket = var.bucket
 }
-
 
 
 #Pipeline resources
@@ -33,7 +29,7 @@ resource "aws_iam_role" "flaskapp_pipeline_role" {
     ]
   })
 
-  tags = locals.tag
+  tags = local.tag
   }
 
 resource "aws_iam_role_policy" "codepipeline_policy" {

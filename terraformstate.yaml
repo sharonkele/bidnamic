@@ -19,21 +19,8 @@ Resources:
       BucketName: !Join
         - ''
         - - !Ref accountName
-          -'-state-bucket'
+          - '-state-bucket'
       VersioningConfiguration:
-        - Status: 'Enabled'
+        Status: 'Enabled'
 
-  terraformLockDbTable:
-    Type: AWS::DynamoDB::Table
-    DeletionPolicy: Retain
-    Properties:
-      KeySchema:
-        - AttributeName: 'lockID'
-          AttributeType: 'S'
-      TableName: 'terraformlock'
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
-      Tags:
-        - Key: 'Application_Owner'
-          Value: 'sharon'  
+   
